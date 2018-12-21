@@ -1,12 +1,17 @@
 package model;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class History {
 	private String base;
-	private Map<String, Double> rates = new HashMap<>();
+	private Map<String, Double> rates;
 	private Double timestamp;
+
+	public History(String base, Map<String, Double> rates, Double timestamp) {
+		this.base = base;
+		this.rates = rates;
+		this.timestamp = timestamp;
+	}
 
 	public String getBase() {
 		return base;

@@ -4,13 +4,15 @@ public class Stored {
 	private Integer X;
 	private Double Y;
 	private Double xMultiplyY;
-	private Double xSquare;
+	private Double xSquared;
+	private Double ySquared;
 
 	public Stored(Integer x, Double y) {
 		X = x;
 		Y = y;
 		this.xMultiplyY = x * y;
-		this.xSquare = Math.pow(x, 2);
+		this.xSquared = Math.pow(x, 2);
+		this.ySquared = Math.pow(y, 2);
 	}
 
 	public Integer getX() {
@@ -37,11 +39,19 @@ public class Stored {
 		this.xMultiplyY = xMultiplyY;
 	}
 
-	public Double getxSquare() {
-		return xSquare;
+	public Double getxSquared() {
+		return xSquared;
 	}
 
-	public void setxSquare(Double xSquare) {
-		this.xSquare = xSquare;
+	public void setxSquared(Double xSquared) {
+		this.xSquared = xSquared;
+	}
+
+	public Double getySquared() {
+		return ySquared;
+	}
+
+	public void setySquared(Double ySquared) {
+		this.ySquared = ySquared;
 	}
 }

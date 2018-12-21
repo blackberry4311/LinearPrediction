@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExchangePredict {
-	public static Double predict(String from, String to, int defaultStep, int predictStep) {
+	private Regression regression = new Regression();
+	private OpenExchangeApiClient apiClient = new OpenExchangeApiClient();
+
+	public Double predict(String from, String to, int defaultStep, int predictStep) {
 		Map<Integer, Stored> storedData = new HashMap<>();
 		try {
 			int count = 0;
@@ -17,14 +20,14 @@ public class ExchangePredict {
 				String month = count < 10 ? "0" + count : "" + count;
 				if (count / 12 == 1) count = 0;
 
-				History history = OpenExchangeApiClient.getHistory(String.format("201%s-%s-15", year, month), from, to);
+				History history = apiClient.getHistory(String.format("201%s-%s-15", year, month), from, to);
 				Double toValue = history.getRates().get(to);
 				storedData.put(i + 1, new Stored(i + 1, toValue));
 			}
 		} catch (Throwable th) {
 			System.out.println(th.getMessage());
 		}
-		return Regression.linearRegression(storedData, predictStep);
+		return regression.linearRegression(storedData, predictStep);
 	}
 
 	public static void main(String... args) {
@@ -45,7 +48,8 @@ public class ExchangePredict {
 		System.out.println(
 				String.format("predict with value from %s to %s, defaultStep %s, predictStep %s", from, to, defaultStep,
 						predictStep));
-		Double result = predict(from, to, defaultStep, predictStep);
+		ExchangePredict predict = new ExchangePredict();
+		Double result = predict.predict(from, to, defaultStep, predictStep);
 		System.out.println("Predict result for step " + predictStep + ": " + result);
 	}
 }

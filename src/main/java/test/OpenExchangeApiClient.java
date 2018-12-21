@@ -7,7 +7,7 @@ import utils.JsonUtils;
 
 //this is a api client only, if want it work concurrent, like api call, should use thread with thread pooling
 public class OpenExchangeApiClient {
-	public static History getHistory(String date, String from, String to) throws Throwable {
+	public History getHistory(String date, String from, String to) throws Throwable {
 		try {
 			String url = String
 					.format("https://openexchangerates.org/api/historical/%s.json?app_id=a196553b087444a98f17abd52b755e67&base=%s&symbols=%s",

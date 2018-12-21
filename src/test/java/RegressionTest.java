@@ -1,13 +1,16 @@
 import model.Stored;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
 import test.Regression;
 
 import java.util.LinkedHashMap;
 
 public class RegressionTest {
+	private Regression regression = new Regression();
+
 	@Test
-	public void testLinearRegression() {
+	public void testWithDefaultData() {
 		//this test case data i got from they way they implement linear regression at https://www.easycalculation.com/statistics/learn-regression.php
 		Stored a = new Stored(60, 3.1);
 		Stored b = new Stored(61, 3.6);
@@ -22,12 +25,12 @@ public class RegressionTest {
 		data.put(4, d);
 		data.put(5, e);
 
-		Double result = Regression.linearRegression(data, 64);
+		Double result = regression.linearRegression(data, 64);
 		Assert.assertTrue("Regression fail", result == 4.058);
 	}
 
 	@Test
-	public void testLinearRegression2() {
+	public void testCustomData() {
 		LinkedHashMap<Integer, Stored> data = new LinkedHashMap<>();
 		data.put(1, new Stored(1, 3.04359));
 		data.put(2, new Stored(2, 2.945926));
@@ -42,7 +45,7 @@ public class RegressionTest {
 		data.put(11, new Stored(11, 3.284672));
 		data.put(12, new Stored(12, 3.503773));
 
-		Double result = Regression.linearRegression(data, 13);
+		Double result = regression.linearRegression(data, 13);
 		Assert.assertTrue("Regression fail", result == 3.263);
 	}
 }

@@ -7,8 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExchangePredict {
-	private Regression regression = new Regression();
-	private OpenExchangeApiClient apiClient = new OpenExchangeApiClient();
+	private Regression regression;
+	private OpenExchangeApiClient apiClient;
+
+	public ExchangePredict() {
+		regression = new Regression();
+		apiClient = new OpenExchangeApiClient();
+	}
 
 	public Double predict(String from, String to, int defaultStep, int predictStep) {
 		Map<Integer, Stored> storedData = new HashMap<>();
